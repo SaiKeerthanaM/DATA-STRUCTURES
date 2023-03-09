@@ -1,0 +1,605 @@
+**INSERT A NODE AT GIVEN POSITION
+## Inseriting a node at given position
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class SLL:
+    def __init__(self):
+        self.head=None
+    def insert_position(self,pos,data):
+        np=node(data)
+        temp=self.head
+        for i in range(pos-1):
+            temp=temp.next
+        np.next=temp.next
+        temp.next=np
+    def display(self):
+        if self.head is None:
+            print("LL is empty")
+        else:
+            temp=self.head
+            while(temp):
+                print(temp.data,"==>",end=" ")
+                temp=temp.next    
+            
+obj=SLL()
+n=node(10)
+obj.head=n
+n1=node(20)
+n.next=n1
+n2=node(30)
+n1.next=n2
+n3=node(40)
+n2.next=n3
+n4=node(50)
+n3.next=n4
+obj.display()
+print(" ")
+obj.insert_position(2,1000)
+obj.display()
+
+OUTPUT:
+10 ==> 20 ==> 30 ==> 40 ==> 50 ==>  
+10 ==> 20 ==> 1000 ==> 30 ==> 40 ==> 50 ==> 
+
+##deleting last node
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class SLL:
+    def __init__(self):
+        self.head=None
+    def delete(self,pos,data):
+        np=node(data)
+        temp=self.head
+        for i in range(1,pos-1):
+            temp=temp.next
+        np.next=temp.next
+        temp.next=np
+    def display(self):
+        if self.head is None:
+            print("LL is empty")
+        else:
+            temp=self.head
+            while(temp):
+                print(temp.data,"==>",end=" ")
+                temp=temp.next
+    def delete(self):
+        temp=self.head.next
+        prev=self.head
+        while temp.next is not None:
+            temp=temp.next
+            prev=prev.next
+        prev.next=None    
+        
+obj=SLL()
+n=node(10)
+obj.head=n
+n1=node(20)
+n.next=n1
+n2=node(30)
+n1.next=n2
+n3=node(40)
+n2.next=n3
+n4=node(50)
+n3.next=n4
+obj.display()
+print(" ")
+obj.delete()
+obj.display()
+OUTPUT:
+10 ==> 20 ==> 30 ==> 40 ==> 50 ==>  
+10 ==> 20 ==> 30 ==> 40 ==> 
+
+
+**DELETE THE FIRST NODE
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class SLL:
+    def __init__(self):
+        self.head=None
+    def display(self):
+        if self.head is None:
+            print("LL is empty")
+        else:
+            temp=self.head
+            while(temp):
+                print(temp.data,"==>",end=" ")
+                temp=temp.next
+    def delete(self):
+        temp=self.head
+        self.head=temp.next
+        temp.next=None
+            
+obj=SLL()
+n=node(10)
+obj.head=n
+n1=node(20)
+n.next=n1
+n2=node(30)
+n1.next=n2
+n3=node(40)
+n2.next=n3
+n4=node(50)
+n3.next=n4
+obj.display()
+print()
+obj.delete()
+obj.display()
+OUTPUT:10 ==> 20 ==> 30 ==> 40 ==> 50 ==>  
+       20 ==> 30 ==> 40 ==> 50 ==> 
+
+
+##DELETE AT POSITION
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class SLL:
+    def __init__(self):
+        self.head=None
+    def delete_position(self,pos):
+        temp=self.head.next
+        prev=self.head
+        for i in range (1,pos-1):
+            temp=temp.next
+            prev=prev.next
+        prev.next=temp.next
+        temp.next=None
+    def display(self):
+        if self.head is None:
+            print("LL is empty")
+        else:
+            temp=self.head
+            while(temp):
+                print(temp.data,"==>",end=" ")
+                temp=temp.next
+    def delete(self):
+        temp=self.head,next
+        prev=self.head
+        while temp.next is not None:
+            temp=temp.next
+            prev=prev.next
+        prev.next=None
+            
+obj=SLL()
+n=node(10)
+obj.head=n
+n1=node(20)
+n.next=n1
+n2=node(30)
+n1.next=n2
+n3=node(40)
+n2.next=n3
+n4=node(50)
+n3.next=n4
+
+obj.display()
+print(" ")
+
+obj.delete_position(3)
+obj.display()
+OUTPUT:10 ==> 20 ==> 30 ==> 40 ==> 50 ==>  
+       10 ==> 20 ==> 40 ==> 50 ==> 
+
+
+##DOUBLE LL
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dLL:
+    def __init__(self):
+        self.head=None
+    def display(self):
+        if self.head is None:
+            print("LL is empty")
+        else:
+            temp=self.head
+            while(temp):
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+    
+obj=dLL()
+n1=node(10)
+obj.head=n1
+n2=node(20)
+obj.head.next=n2
+n2.previous=n1
+n1.next=n2
+obj.display()
+OUTPUT:10 <--> 20 <-->
+
+##GUESSING A NUMBER
+import random
+n=random.randrange(1,100)
+guess=int(input("enter a number: "))
+while n!=guess:
+    if guess<n:
+        print("too low")
+        guess=int(input("enter a number again: "))
+    elif guess>n:
+        print("too high")
+        guess=int(input("enter a number again: "))
+    else:
+        break
+print("you guessed it right!!")
+OUTPUT:
+enter a number: 50
+too high
+enter a number again: 40
+too high
+enter a number again: 30
+too low
+enter a number again: 35
+too high
+enter a number again: 33
+too high
+enter a number again: 31
+you guessed it right!!
+
+
+
+**DOUBLE LINKEDLIST INSERT AT BEGINNING
+1)create new node with 3segments
+2)new.next=head
+3)head.prev=new
+4)new.prev=null
+5)head=new node
+
+##insert node logic
+def insert(self):
+   n=Node(300)
+   temp=self.head
+   temp.prev=n
+   n.next=temp
+   self.head=n
+
+##insert at end
+def insert_end(self):
+    n=Node(300)
+    temp=self.head
+    while temp.next is not None:
+    temp=temp.next
+temp.next=n
+n.prev=temp
+
+##insert at position
+def insert_pos(self,pos):
+    n=Node(300)
+    temp=self.head
+    for i in range (1,pos-1):
+        temp=temp.next
+    n.prev=temp
+    n.next=temp.next
+    temp.next.prev=n
+    temp.next=n
+
+
+**DOUBLE LINKEDLIST DELETE FIRST NODE
+1)temp=self.head
+2)temp.next.prev=null
+3)self.head=temp.next
+4)temp.next=null
+
+###insertion at start double linked list
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def insert_start(self):
+        n=Node(5)
+        temp=self.head
+        temp.prev=n
+        n.next=temp
+        self.head=n
+        
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+obj.insert_start()
+obj.display()
+OUTPUT:5 <--> 10 <--> 20 <--> 
+
+
+
+#Insert at end dll
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def insert_end(self):
+        n=Node(30)
+        temp=self.head
+        while temp.next is not None:
+            temp=temp.next
+        temp.next=n
+        n.prev=temp
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+obj.insert_end()
+obj.display()
+OUTPUT:10 <--> 20 <--> 30 <--> 
+
+
+#Insert at a position dll
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def insert_pos(self,pos):
+        n=Node(25)
+        temp=self.head
+        for i in range (1,pos-1):
+            temp=temp.next
+        n.prev=temp
+        n.next=temp.next
+        temp.next.prev=n
+        temp.next=n
+        
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+n3=Node(30)
+n3.prev=n2
+n2.next=n3
+obj.insert_pos(3)
+obj.display()
+OUTPUT:10 <--> 20 <--> 25 <--> 30 <--> 
+
+#Circular linkedlist
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class Createlist:
+    def __init__(self):
+        self.head=Node(None)
+        self.tail=Node(None)
+        self.head.next=self.tail
+        self.tail.next=self.head
+
+        #Adding node at endof LL
+    def add(self,data):
+        newNode=Node(data)
+        #Is empty
+        if self.head.data is None:
+            self.head=newNode
+            self.tail=newNode
+            newNode.next=self.head
+        else:
+            self.tail.next=newNode
+            self.tail=newNode
+            #it is cll with only 1 element so tail point to head
+            self.tail.next=self.head
+    def display(self):
+        current=self.head
+        if self.head is None:
+            print("List is empty")
+            return
+        else:
+            print("Nodes of circular linked list:  ")
+            print(current.data,"-->")
+            while(current.next != self.head):
+                current=current.next
+                print(current.data,"-->")
+class CircularLinkedList:
+    c1=Createlist()
+    c1.add("P")
+    c1.add("Y")
+    c1.add("T")
+    c1.add("H")
+    c1.add("O")
+    c1.add("N")
+    c1.display()
+OUTPUT:
+Nodes of circular linked list:  
+P -->
+Y -->
+T -->
+H -->
+O -->
+N -->
+
+
+#delete at beginning
+ def delete_beginning(self):
+     temp=self.head
+     self.head=temp.next
+     temp.next=None
+
+#deleting last node in dll:
+def delete_end(self):
+    temp=self.head.next
+    prev=self.head
+    while temp.next is not None:
+        temp=temp.next
+        pre=prev.next
+    prev.next=None
+
+#deleting at required position
+def delete_position(self,pos):
+     temp=self.head.next
+     prev=self.head
+     for i in range(1,pos-1):
+         temp=temp.next
+         prev=prev.next
+     prev.next=temp.next
+     temp.next=None
+
+**************************************************
+##delete at position
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def delete_position(self,pos):
+     temp=self.head.next
+     prev=self.head
+     for i in range(1,pos-1):
+         temp=temp.next
+         prev=prev.next
+     prev.next=temp.next
+     temp.next=None
+
+        
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+n3=Node(30)
+n3.prev=n2
+n2.next=n3
+obj.delete_position(3)
+obj.display()
+OUTPUT:10 <--> 20 <-->
+
+##DELETE AT START DLL
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def delete_beginning(self):
+        temp=self.head
+        self.head=temp.next
+        temp.next=None
+        
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+obj.delete_beginning()
+obj.display()
+OUTPUT:20 <--> 
+
+
+##DELETE AT END DLL
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.previous=None
+        self.next=None
+class dll:
+    def __init__(self):
+        self.head=None
+    def delete_end(self):
+        temp=self.head.next
+        prev=self.head
+        while temp.next is not None:
+            temp=temp.next
+            pre=prev.next
+        prev.next=None
+    def display(self):
+        if self.head is None:
+            print("Empty List")
+        else:
+            temp=self.head
+            while temp:
+                print(temp.data,"<-->",end=" ")
+                temp=temp.next
+obj=dll()
+n1=Node(10)
+obj.head=n1
+n2=Node(20)
+n2.prev=n1
+n1.next=n2
+obj.delete_end()
+obj.display()
+OUTPUT:10 <-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
