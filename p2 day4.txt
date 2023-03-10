@@ -1,0 +1,308 @@
+**CIRCULAR QUEUE:
+##
+class circularqueue():
+    def __init__(self,size):
+        #initializing the class
+        self.size=size
+        #canuse self.queue=[None]*size
+        self.queue=[None for i in range (size)]
+        self.front=self.rear=-1
+    def enqueue(self,data):
+        #condition if queue is full
+        if((self.rear+1)%self.size==self.front):
+            print("Queue is full\n")
+        #condition for empty queue
+        elif(self.front==-1):
+            self.front=0
+            self.rear=0
+            self.queue[self.rear]=data
+            #always add element at tail place
+        else:
+            #next position of rear
+            self.rear=(self.rear+1)%self.size
+            self.queue[self.rear]=data
+    def dequeue(self):
+        if (self.front==-1):
+            #condition for empty queue
+            print("Queue is empty\n")
+        #condition for only one element
+        elif (self.front==self.rear):
+            temp=self.queue[self.front]
+            self.front=-1
+            self.rear=-1
+            return temp
+        else:
+            temp=self.queue[self.front]
+            self.front=(self.front+1)%self.size
+            return temp
+    def display(self):
+        if(self.front==-1):
+            print("Queue is empty\n")
+        elif(self.rear>=self.front):
+            print("elements in the circular queue",end=" ")
+            for i in range(self.front,self.rear+1):
+                print(self.queue[i],end=" ")
+            print()
+        else:
+            print("element in circular queue are:",end="")
+            for i in range(self.front,self.size):
+                print(self.queue[i],end=" ")
+            for i in range(0,self.rear+1):
+                print(self.queue[i],end=" ")
+            print()
+        if((self.rear+1)%self.size==self.front):
+            print("Queue is full")
+
+ob=circularqueue(5)
+ob.enqueue(10)
+ob.enqueue(20)
+ob.enqueue(-11)
+ob.enqueue(-3)
+ob.display()
+print("Deleted value=",ob.dequeue())
+print("Deleted value=",ob.dequeue())
+ob.display()
+ob.enqueue(4)
+ob.enqueue(22)
+ob.enqueue(7)
+ob.display()
+ob.enqueue(79)
+OUTPUT:
+elements in the circular queue 10 20 -11 -3 
+Deleted value= 10
+Deleted value= 20
+elements in the circular queue -11 -3 
+element in circular queue are:-11 -3 4 22 7 
+Queue is full
+Queue is full
+
+##
+with linear queue empty spaces which we get after performing dequeue operation cannot be used however it is very much possible when we make that linear queue as circular queue.
+This is the advantage of circular queue.
+
+##find out when rear will be greater than front in circular queue
+
+
+
+**TREE:
+in a tree nodes can have n number of children
+           ______1____
+          2           3
+      4   5  6      7   8 
+                    9   10
+                  11 
+TYPES OF TREES:
+1)BINARY TREE:a node can have max 2 children.
+                 1
+             2      3
+           5  6
+levelorder traversal-1,2,3,5,6
+note:
+1)we have to traverse level by level starting from root proceeding from left to right.
+example:                   50
+                      20        45
+                    11  15    30  78
+tree traversals are 2 types:
+1)bfs(breadth first search)
+2)dfs(depth first search)
+*dfs types:
+pre order traversal
+in order traversal
+post order traversal
+
+
+
+##Binary tree
+class binarytreenode:
+    def __init__(self,data):
+        self.data=data
+        self.leftchild=None
+        self.rightchild=None
+node1=binarytreenode(38)
+node2=binarytreenode(30)
+node3=binarytreenode(37)
+node4=binarytreenode(38)
+node5=binarytreenode(39)
+node6=binarytreenode(36)
+node7=binarytreenode(34)
+
+node1.leftchild=node2
+node1.rightchild=node3
+node2.leftchild=node4
+node2.rightchild=node5
+node3.leftchild=node6
+node4.rightchild=node7
+
+print("root node is",node1.data)
+print(node1.leftchild.data)
+print(node1.rightchild.data)
+print(node2.leftchild.data)
+print(node2.rightchild.data)
+print(node3.leftchild.data)
+print(node4.rightchild.data)
+OUTPUT:
+root node is 38
+30
+37
+38
+39
+36
+34
+
+
+*BINART TREE INSERTION:
+*we will do level order traversal till we find an empty space.
+##binary tree insert
+class newNode():
+    def __init__(self,data):
+        self.key=data
+        self.left=None
+        self.right=None
+def inorder(temp):
+    if (not temp):
+        return
+    inorder(temp.left)
+    print(temp.key,end=" ")
+    inorder(temp.right)
+def insert(temp,key):
+    if not temp:
+        root=newNode(key)
+        return
+    q=[]
+    q.append(temp)
+    print(type(q))
+    print(len(q))
+
+    while(len(q)):
+        print(len(q))
+        temp=q[0]
+        q.pop(0)
+        if(not temp.left):
+            temp.left=newNode(key)
+            break
+        else:
+            q.append(temp.left)
+        if(not temp.right):
+            temp.right=newNode(key)
+            break
+        else:
+            q.append(temp.right)
+if __name__=='__main__':
+    root=newNode(10)
+    root.left=newNode(11)
+    root.left.left=newNode(7)
+    root.right=newNode(9)
+    root.right.left=newNode(19)
+    root.right.right=newNode(8)
+
+    print("Inorder traversal before insertion:",end=" ")
+    inorder(root)
+    key=22
+    insert(root,key)
+    print()
+    print("Inorder traversal after insertion:",end=" ")
+    inorder(root)
+OUTPUT:
+Inorder traversal before insertion: 7 11 10 19 9 8 <class 'list'>
+1
+1
+2
+
+Inorder traversal after insertion: 7 11 22 10 19 9 8 
+
+
+**PREORDER TRAVERSAL:root-left-right(D-L-R)
+                      A
+                 B         C
+               D   E     F   G
+          answer:A,B,D,E,C,F,G
+
+**INORDER TRAVERSAL:left-root-right(L-D-R)
+                      A
+                  B        C 
+               D    E    F   G
+           answer:D,B,E,A,F,C,G   
+**POSTORDER TRAVERSAL:left-right-root(L-R-D)
+                      A
+                  B        C 
+               D    E    F   G
+           answer:D,E,B,F,G,C,A
+
+
+##TRAVERSAL OF TREE
+class Node:
+    def __init__(self,key):
+        self.left=None
+        self.right=None
+        self.val=key
+def printInorder(root):
+    if root:
+        printInorder(root.left)
+        print(root.val,end=" "),
+        printInorder(root.right)
+def printPostorder(root):
+    if root:
+        printPostorder(root.left)
+        printPostorder(root.right)
+        print(root.val,end=" "),
+def printPreorder(root):
+    if root:
+        print(root.val,end=" "),
+        printPreorder(root.left)
+        printPreorder(root.right)
+root=Node(1)
+root.left=Node(2)
+root.right=Node(3)
+root.left.left=Node(4)
+root.left.right=Node(5)
+print("PRE ORDER:")
+printPreorder(root)
+print()
+print("\nIN Order")
+printInorder(root)
+print()
+print("\nPOST Order:")
+printPostorder(root)
+print()
+OUTPUT:
+PRE ORDER:
+1 2 4 5 3 
+
+IN Order
+4 2 5 1 3 
+
+POST Order:
+4 5 2 3 1    
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
